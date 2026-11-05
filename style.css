@@ -1,0 +1,345 @@
+/* ==========================================================================
+   1. COLOR PALETTE & DESIGN SYSTEM
+   ========================================================================== */
+:root {
+  --bg-warm: #FAF8F5;          /* Warm cream background */
+  --card-bg: #FFFFFF;          /* Pure white card container */
+  --sage-primary: #5A7E6C;     /* Healing sage green */
+  --sage-hover: #486657;       /* Darker sage for interactions */
+  --teal-soft: #88AAB0;        /* Soothing ocean teal */
+  --teal-light: #E8F0F2;       /* Light teal highlight background */
+  --peach-accent: #E8A88A;     /* Warm peach accent */
+  --peach-light: #FDF4E3;      /* Gentle pastel peach background */
+  --text-dark: #2C3531;        /* Deep charcoal for readable text */
+  --text-muted: #626D68;       /* Medium grey-green for subtitles */
+  --border-subtle: #E2E8E4;    /* Subtle dividers */
+  --shadow-soft: 0 10px 30px rgba(90, 126, 108, 0.08);
+  --radius-lg: 20px;
+  --radius-md: 12px;
+  --radius-full: 999px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: var(--bg-warm);
+  color: var(--text-dark);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+/* ==========================================================================
+   2. HEADER & NAVIGATION
+   ========================================================================== */
+header {
+  background-color: rgba(250, 248, 245, 0.9);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.nav-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.2rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--sage-primary);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-muted);
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: var(--sage-primary);
+}
+
+/* ==========================================================================
+   3. HERO SECTION
+   ========================================================================== */
+.hero {
+  max-width: 1100px;
+  margin: 3rem auto 4rem auto;
+  padding: 0 2rem;
+  text-align: center;
+}
+
+.hero-badge {
+  display: inline-block;
+  background-color: var(--teal-light);
+  color: var(--sage-primary);
+  padding: 0.4rem 1.2rem;
+  border-radius: var(--radius-full);
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.hero h1 {
+  font-size: 3.2rem;
+  line-height: 1.2;
+  margin-bottom: 1.2rem;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  max-width: 650px;
+  margin: 0 auto 2.5rem auto;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.btn {
+  padding: 0.8rem 1.8rem;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.btn-primary {
+  background-color: var(--sage-primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: var(--sage-hover);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background-color: var(--peach-light);
+  color: #9C5838;
+  border: 1px solid var(--peach-accent);
+}
+
+.btn-secondary:hover {
+  background-color: var(--peach-accent);
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   4. MAIN CONTAINER & CARD LAYOUT
+   ========================================================================== */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem 5rem 2rem;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border-subtle);
+}
+
+.card-title {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+/* ==========================================================================
+   5. FEATURE 1: GUIDED BREATHING EXERCISE
+   ========================================================================== */
+.breathing-section {
+  text-align: center;
+  background: linear-gradient(135deg, #FFFFFF 0%, var(--teal-light) 100%);
+}
+
+.breathing-circle-container {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.breathing-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: var(--teal-soft);
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  transition: transform 4s ease-in-out, background-color 4s ease-in-out;
+}
+
+.breathing-circle.expand {
+  transform: scale(1.6);
+  background-color: var(--sage-primary);
+}
+
+/* ==========================================================================
+   6. FEATURE 2: MOOD CHECK-IN
+   ========================================================================== */
+.mood-options {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+}
+
+.mood-btn {
+  flex: 1;
+  padding: 1rem 0.5rem;
+  background: var(--bg-warm);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  transition: all 0.2s ease;
+}
+
+.mood-btn span {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.mood-btn:hover, .mood-btn.active {
+  background: var(--peach-light);
+  border-color: var(--peach-accent);
+  transform: translateY(-2px);
+}
+
+.mood-feedback {
+  background-color: var(--bg-warm);
+  padding: 1.2rem;
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  margin-top: 1rem;
+  display: none;
+  border-left: 4px solid var(--sage-primary);
+}
+
+/* ==========================================================================
+   7. FEATURE 3: AFFIRMATION GENERATOR
+   ========================================================================== */
+.affirmation-card {
+  background: linear-gradient(135deg, var(--peach-light) 0%, #FFFFFF 100%);
+  text-align: center;
+}
+
+.affirmation-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-style: italic;
+  color: #7A4328;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1.5rem 0;
+  transition: opacity 0.2s ease;
+}
+
+/* ==========================================================================
+   8. FEATURE 4: GROUNDING TECHNIQUE (5-4-3-2-1)
+   ========================================================================== */
+.grounding-list {
+  list-style: none;
+  margin-top: 1rem;
+}
+
+.grounding-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.grounding-item:last-child {
+  border-bottom: none;
+}
+
+.grounding-num {
+  background-color: var(--teal-light);
+  color: var(--sage-primary);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   9. FOOTER
+   ========================================================================== */
+footer {
+  border-top: 1px solid var(--border-subtle);
+  background-color: white;
+  padding: 3rem 2rem;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+footer p {
+  margin-bottom: 0.5rem;
+}

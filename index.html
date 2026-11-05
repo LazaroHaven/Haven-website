@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haven - Mental Health Awareness & Comforting Support</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter and Plus Jakarta Sans for soft, modern typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Gentle SVG Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        haven: {
+                            bg: '#FBF9F6',        /* Cream/Off-white soft background */
+                            card: '#FFFFFF',      /* Clean white card */
+                            primary: '#2D6A4F',   /* Deep calming green / mental health awareness */
+                            mint: '#52B788',      /* Soft growth mint */
+                            sage: '#D8F3DC',      /* Very soft sage accent */
+                            teal: '#1D7074',      /* Serene ocean teal */
+                            warm: '#F4A261',      /* Soft warm peach/coral for empathy & comfort */
+                            peachLight: '#FFE8D6',/* Gentle warm tint */
+                            textDark: '#2B2D42',  /* Soft slate text (never pure black) */
+                            textMuted: '#6C757D' /* Gentle gray text */
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['Plus Jakarta Sans', 'sans-serif'],
+                        body: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FBF9F6;
+            color: #2B2D42;
+            scroll-behavior: smooth;
+        }
+
+        /* Guided Breathing Animation Styling */
+        .breath-circle {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(82, 183, 136, 0.4) 0%, rgba(29, 112, 116, 0.15) 70%);
+            border: 3px solid #52B788;
+            box-shadow: 0 0 25px rgba(82, 183, 136, 0.3);
+            transition: transform 4s ease-in-out, background-color 4s ease-in-out;
+        }
+
+        .breath-expand {
+            transform: scale(1.4);
+            background: radial-gradient(circle, rgba(244, 162, 97, 0.5) 0%, rgba(232, 113, 89, 0.2) 70%);
+            border-color: #F4A261;
+            box-shadow: 0 0 35px rgba(244, 162, 97, 0.4);
+        }
+
+        .breath-hold {
+            transform: scale(1.4);
+        }
+
+        /* Glassmorphism & Soft Card Elevation */
+        .soft-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(216, 243, 220, 0.6);
+            transition: all 0.3s ease;
+        }
+
+        .soft-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px -10px rgba(45, 106, 79, 0.08);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FBF9F6;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #B7E4C7;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #52B788;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between antialiased selection:bg-haven-sage selection:text-haven-primary">
+
+    <!-- Header / Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-haven-bg/90 backdrop-blur-md border-b border-haven-sage/50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#hero" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-full bg-haven-sage flex items-center justify-center text-haven-primary group-hover:bg-haven-warm group-hover:text-white transition-colors duration-300">
+                    <i class="fa-solid fa-heart-pulse text-lg"></i>
+                </div>
+                <div>
+                    <span class="font-heading font-bold text-xl text-haven-primary tracking-tight">Haven</span>
+                    <span class="text-xs text-haven-teal block -mt-1 font-medium">Safe Space & Awareness</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-haven-textDark">
+                <a href="#awareness" class="hover:text-haven-primary transition-colors">Awareness</a>
+                <a href="#comfort" class="hover:text-haven-primary transition-colors">Comfort Corner</a>
+                <a href="#checkin" class="hover:text-haven-primary transition-colors">Check-In</a>
+                <a href="#resources" class="hover:text-haven-primary transition-colors">Resources</a>
+            </nav>
+
+            <!-- Quick Action Button -->
+            <a href="#comfort" class="px-5 py-2.5 rounded-full bg-haven-primary text-white text-sm font-medium hover:bg-haven-teal transition-all shadow-sm hover:shadow flex items-center gap-2">
+                <i class="fa-solid fa-wind text-xs"></i>
+                <span>Breathe Now</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow">
+
+        <!-- Hero Section -->
+        <section id="hero" class="relative py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto text-center">
+            <!-- Background Decorative Pills -->
+            <div class="absolute top-12 left-1/2 -translate-x-1/2 w-72 h-72 bg-haven-sage/40 rounded-full blur-3xl -z-10"></div>
+            <div class="absolute top-20 right-10 w-60 h-60 bg-haven-peachLight/50 rounded-full blur-3xl -z-10"></div>
+
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-haven-peachLight text-haven-warm text-xs font-semibold uppercase tracking-wider mb-6">
+                <i class="fa-solid fa-sun text-xs"></i> You Are Welcome Exactly As You Are
+            </div>
+
+            <h1 class="font-heading text-4xl sm:text-5xl md:text-6xl font-bold text-haven-primary leading-tight max-w-3xl mx-auto">
+                A Calm Safe Space for Your Mind & Well-Being
+            </h1>
+
+            <p class="mt-6 text-lg sm:text-xl text-haven-textMuted max-w-2xl mx-auto font-light leading-relaxed">
+                Take a gentle pause. Mental health is a quiet journey, and you don't have to navigate it alone. Explore gentle resources, grounding exercises, and words of warm encouragement.
+            </p>
+
+            <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="#comfort" class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-haven-warm text-white font-medium text-base hover:bg-opacity-90 transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-spa"></i>
+                    <span>Enter Comfort Zone</span>
+                </a>
+                <a href="#awareness" class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white text-haven-primary border border-haven-sage font-medium text-base hover:bg-haven-sage/20 transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-book-open"></i>
+                    <span>Learn About Mental Health</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Section 1: Mental Health Awareness -->
+        <section id="awareness" class="py-16 bg-white/60 border-y border-haven-sage/40 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center max-w-2xl mx-auto mb-14">
+                    <h2 class="font-heading text-3xl font-bold text-haven-primary">Understanding Mental Health</h2>
+                    <p class="text-haven-textMuted mt-3">Removing the stigma begins with gentle understanding, kindness, and education.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Card 1 -->
+                    <div class="soft-card p-8 rounded-2xl">
+                        <div class="w-12 h-12 rounded-xl bg-haven-sage flex items-center justify-center text-haven-primary text-xl mb-6">
+                            <i class="fa-solid fa-hands-holding-child"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-xl text-haven-primary mb-3">Breaking the Stigma</h3>
+                        <p class="text-haven-textMuted text-sm leading-relaxed">
+                            Seeking help for emotional well-being is a sign of profound strength, not weakness. Talking openly about feelings normalizes support for everyone.
+                        </p>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="soft-card p-8 rounded-2xl">
+                        <div class="w-12 h-12 rounded-xl bg-haven-peachLight flex items-center justify-center text-haven-warm text-xl mb-6">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-xl text-haven-primary mb-3">Stress & Anxiety</h3>
+                        <p class="text-haven-textMuted text-sm leading-relaxed">
+                            Anxiety is your body's natural alert system, but it can feel overwhelming. Recognizing early signs gives you back control over your rhythm.
+                        </p>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="soft-card p-8 rounded-2xl">
+                        <div class="w-12 h-12 rounded-xl bg-haven-sage flex items-center justify-center text-haven-teal text-xl mb-6">
+                            <i class="fa-solid fa-seedling"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-xl text-haven-primary mb-3">Gentle Self-Care</h3>
+                        <p class="text-haven-textMuted text-sm leading-relaxed">
+                            Self-care isn't selfish—it's essential. It can be as simple as drinking water, sitting in silence, setting gentle boundaries, or resting deeply.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Comfort & Reassurance Zone -->
+        <section id="comfort" class="py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-haven-warm text-sm font-semibold uppercase tracking-wider">The Safe Space</span>
+                <h2 class="font-heading text-3xl sm:text-4xl font-bold text-haven-primary mt-1">Comfort & Reassurance Zone</h2>
+                <p class="text-haven-textMuted mt-3">Interactive tools designed to ground you, soothe anxiety, and offer gentle encouragement.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                
+                <!-- Tool A: Interactive Guided Breathing Exercise -->
+                <div class="bg-white p-8 sm:p-10 rounded-3xl shadow-sm border border-haven-sage/60 flex flex-col items-center text-center">
+                    <div class="inline-flex items-center gap-2 text-haven-teal font-semibold text-sm mb-4">
+                        <i class="fa-solid fa-wind"></i> Guided Box Breathing
+                    </div>
+                    <h3 class="font-heading text-2xl font-bold text-haven-primary mb-2">Reset Your Nervous System</h3>
+                    <p class="text-haven-textMuted text-sm max-w-md mb-8">Follow the expanding circle to slow your pulse and bring peace to your mind.</p>
+
+                    <!-- Breathing Visual Circle -->
+                    <div class="relative my-6 flex items-center justify-center h-56 w-56">
+                        <div id="breathCircle" class="breath-circle flex items-center justify-center">
+                            <span id="breathText" class="font-heading font-semibold text-lg text-haven-primary">Ready?</span>
+                        </div>
+                    </div>
+
+                    <!-- Breathing Controls -->
+                    <div class="mt-6 flex gap-4">
+                        <button id="startBreathBtn" onclick="toggleBreathing()" class="px-6 py-2.5 rounded-full bg-haven-primary text-white text-sm font-medium hover:bg-haven-teal transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-play text-xs"></i>
+                            <span id="breathBtnLabel">Start Exercise</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tool B: Daily Affirmation Generator & Grounding Technique -->
+                <div class="flex flex-col gap-8">
+                    
+                    <!-- 365 Daily Comfort Notes -->
+                    <div class="bg-gradient-to-br from-haven-peachLight/50 via-white to-haven-sage/30 p-8 rounded-3xl border border-haven-warm/30 shadow-sm">
+                        <div class="flex items-center justify-between gap-3 mb-4">
+                            <span class="text-haven-warm font-semibold text-sm flex items-center gap-2">
+                                <i class="fa-solid fa-book-open"></i> Daily Encouragement
+                            </span>
+                            <span class="text-xs bg-white px-3 py-1 rounded-full border border-haven-warm/20 text-haven-textMuted">365 Comfort Notes</span>
+                        </div>
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-5">
+                            <span id="dailyDate" class="text-xs font-semibold tracking-wide uppercase text-haven-teal">Your note for today</span>
+                            <span id="quoteDay" class="text-xs text-haven-textMuted">Day 1 of 365</span>
+                        </div>
+                        <div class="min-h-[150px] flex flex-col justify-center">
+                            <span class="text-4xl text-haven-warm/70 font-heading">“</span>
+                            <p id="affirmationText" aria-live="polite" class="font-heading text-xl sm:text-2xl text-haven-primary font-medium italic leading-relaxed -mt-2">
+                                You do not have to figure everything out right now. Take one gentle step at a time.
+                            </p>
+                            <span class="text-right text-4xl text-haven-warm/70 font-heading leading-none">”</span>
+                        </div>
+                        <p id="quoteCategory" class="text-xs text-haven-teal font-semibold mt-2">A gentle reminder</p>
+                        <div class="mt-5 flex flex-wrap gap-2">
+                            <button onclick="showDailyQuote()" class="px-4 py-2 rounded-full bg-haven-primary text-white text-sm font-medium hover:bg-haven-teal transition-all"><i class="fa-solid fa-calendar-day mr-1"></i> Today's Note</button>
+                            <button onclick="generateAffirmation()" class="px-4 py-2 rounded-full bg-haven-warm text-white text-sm font-medium hover:bg-opacity-90 transition-all"><i class="fa-solid fa-shuffle mr-1"></i> Surprise Me</button>
+                            <button onclick="toggleFavorite()" id="favoriteQuoteBtn" class="px-4 py-2 rounded-full bg-white border border-haven-sage text-haven-primary text-sm font-medium hover:bg-haven-sage/30 transition-all"><i class="fa-regular fa-heart mr-1"></i> Save</button>
+                            <button onclick="copyQuote()" class="px-4 py-2 rounded-full bg-white border border-haven-sage text-haven-primary text-sm font-medium hover:bg-haven-sage/30 transition-all"><i class="fa-regular fa-copy mr-1"></i> Copy</button>
+                        </div>
+                        <div class="mt-5 pt-5 border-t border-haven-warm/20">
+                            <div class="flex flex-col sm:flex-row gap-2">
+                                <label class="sr-only" for="quoteSearch">Search comfort notes</label>
+                                <input id="quoteSearch" type="search" placeholder="Find a note for what you're feeling..." class="min-w-0 flex-1 px-4 py-2.5 rounded-xl border border-haven-sage bg-white text-sm focus:outline-none focus:ring-2 focus:ring-haven-mint">
+                                <select id="quoteCategoryFilter" aria-label="Filter by topic" class="px-3 py-2.5 rounded-xl border border-haven-sage bg-white text-sm text-haven-textDark">
+                                    <option value="all">All topics</option>
+                                    <option value="Self-kindness">Self-kindness</option>
+                                    <option value="Hard days">Hard days</option>
+                                    <option value="Growth">Growth</option>
+                                    <option value="Rest & balance">Rest & balance</option>
+                                    <option value="Hope">Hope</option>
+                                </select>
+                            </div>
+                            <div class="flex items-center justify-between mt-3 gap-2">
+                                <p id="quoteSearchCount" class="text-xs text-haven-textMuted">Explore all 365 notes</p>
+                                <button onclick="showFavorites()" class="text-xs font-semibold text-haven-teal hover:underline"><i class="fa-solid fa-heart mr-1"></i>My saved notes</button>
+                            </div>
+                            <div id="quoteResults" class="hidden mt-3 max-h-48 overflow-y-auto space-y-2" aria-live="polite"></div>
+                            <p id="quoteToast" role="status" class="text-xs text-haven-teal mt-3 min-h-4"></p>
+                        </div>
+                    </div>
+
+                    <!-- Grounding 5-4-3-2-1 Technique -->
+                    <div class="bg-white p-8 rounded-3xl border border-haven-sage/60 shadow-sm">
+                        <h4 class="font-heading font-bold text-lg text-haven-primary mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-anchor text-haven-teal"></i> 5-4-3-2-1 Quick Grounding Exercise
+                        </h4>
+                        <p class="text-haven-textMuted text-xs mb-4">When feeling overwhelmed, look around you and identify:</p>
+                        <div class="grid grid-cols-5 gap-2 text-center text-xs">
+                            <div class="p-2.5 rounded-xl bg-haven-bg border border-haven-sage/40">
+                                <span class="block font-bold text-haven-primary text-base">5</span>
+                                <span class="text-haven-textMuted">Things you see</span>
+                            </div>
+                            <div class="p-2.5 rounded-xl bg-haven-bg border border-haven-sage/40">
+                                <span class="block font-bold text-haven-primary text-base">4</span>
+                                <span class="text-haven-textMuted">Things you feel</span>
+                            </div>
+                            <div class="p-2.5 rounded-xl bg-haven-bg border border-haven-sage/40">
+                                <span class="block font-bold text-haven-primary text-base">3</span>
+                                <span class="text-haven-textMuted">Things you hear</span>
+                            </div>
+                            <div class="p-2.5 rounded-xl bg-haven-bg border border-haven-sage/40">
+                                <span class="block font-bold text-haven-primary text-base">2</span>
+                                <span class="text-haven-textMuted">Things you smell</span>
+                            </div>
+                            <div class="p-2.5 rounded-xl bg-haven-bg border border-haven-sage/40">
+                                <span class="block font-bold text-haven-primary text-base">1</span>
+                                <span class="text-haven-textMuted">Thing you taste</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Mood Check-In & Crisis Resources -->
+        <section id="checkin" class="py-16 bg-haven-sage/20 border-t border-haven-sage/40 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto">
+                
+                <!-- Mood Tracker Box -->
+                <div class="bg-white p-8 sm:p-10 rounded-3xl shadow-sm border border-haven-sage/80 mb-16 text-center">
+                    <h2 class="font-heading text-2xl sm:text-3xl font-bold text-haven-primary">How are you feeling right now?</h2>
+                    <p class="text-haven-textMuted text-sm mt-2 mb-8">Click an icon that best matches your current mood for gentle tailored support.</p>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-xl mx-auto">
+                        <button onclick="checkInMood('anxious')" class="p-4 rounded-2xl border border-haven-sage/50 bg-haven-bg hover:border-haven-warm hover:bg-haven-peachLight/30 transition-all flex flex-col items-center gap-2 group">
+                            <span class="text-3xl group-hover:scale-110 transition-transform">😰</span>
+                            <span class="text-xs font-semibold text-haven-textDark">Anxious / Overwhelmed</span>
+                        </button>
+                        <button onclick="checkInMood('sad')" class="p-4 rounded-2xl border border-haven-sage/50 bg-haven-bg hover:border-haven-teal hover:bg-haven-sage/30 transition-all flex flex-col items-center gap-2 group">
+                            <span class="text-3xl group-hover:scale-110 transition-transform">🌧️</span>
+                            <span class="text-xs font-semibold text-haven-textDark">Sad / Heavy</span>
+                        </button>
+                        <button onclick="checkInMood('tired')" class="p-4 rounded-2xl border border-haven-sage/50 bg-haven-bg hover:border-haven-primary hover:bg-haven-sage/30 transition-all flex flex-col items-center gap-2 group">
+                            <span class="text-3xl group-hover:scale-110 transition-transform">🥱</span>
+                            <span class="text-xs font-semibold text-haven-textDark">Exhausted / Tired</span>
+                        </button>
+                        <button onclick="checkInMood('calm')" class="p-4 rounded-2xl border border-haven-sage/50 bg-haven-bg hover:border-haven-mint hover:bg-haven-sage/30 transition-all flex flex-col items-center gap-2 group">
+                            <span class="text-3xl group-hover:scale-110 transition-transform">🌿</span>
+                            <span class="text-xs font-semibold text-haven-textDark">Calm / Peaceful</span>
+                        </button>
+                    </div>
+
+                    <!-- Dynamic Feedback Message -->
+                    <div id="moodResponse" class="hidden mt-8 p-6 rounded-2xl text-left bg-haven-bg border border-haven-sage">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-haven-sage flex items-center justify-center text-haven-primary shrink-0 mt-1">
+                                <i class="fa-solid fa-heart"></i>
+                            </div>
+                            <div>
+                                <h4 id="moodTitle" class="font-heading font-bold text-haven-primary text-base"></h4>
+                                <p id="moodMessage" class="text-haven-textMuted text-sm mt-1 leading-relaxed"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resources & Helplines -->
+                <div id="resources" class="text-center">
+                    <span class="text-haven-teal text-sm font-semibold uppercase tracking-wider">Immediate Support</span>
+                    <h2 class="font-heading text-3xl font-bold text-haven-primary mt-1 mb-8">Crisis Helplines & Resources</h2>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+                        <div class="bg-white p-6 rounded-2xl border border-haven-sage/80 shadow-sm flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-haven-peachLight flex items-center justify-center text-haven-warm text-xl shrink-0">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-heading font-bold text-haven-primary text-lg">National Crisis Line</h3>
+                                <p class="text-haven-textMuted text-xs mt-1">If you are in immediate danger, contact local emergency services or go to the nearest emergency department.</p>
+                                <span class="inline-block mt-3 text-haven-warm font-bold text-sm bg-haven-peachLight/40 px-3 py-1 rounded-lg">Philippines emergency hotline: 911</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-2xl border border-haven-sage/80 shadow-sm flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-haven-sage flex items-center justify-center text-haven-primary text-xl shrink-0">
+                                <i class="fa-solid fa-comments"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-heading font-bold text-haven-primary text-lg">Crisis Text Line</h3>
+                                <p class="text-haven-textMuted text-xs mt-1">For mental health crisis support in the Philippines, contact the National Center for Mental Health.</p>
+                                <span class="inline-block mt-3 text-haven-primary font-bold text-sm bg-haven-sage/50 px-3 py-1 rounded-lg">NCMH Crisis Hotline: 9988</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-haven-primary text-white py-12 px-4 sm:px-6 lg:px-8 border-t border-haven-teal">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="text-center md:text-left">
+                <div class="flex items-center justify-center md:justify-start gap-2">
+                    <i class="fa-solid fa-heart-pulse text-haven-warm"></i>
+                    <span class="font-heading font-bold text-lg">Haven Space</span>
+                </div>
+                <p class="text-haven-sage text-xs mt-2 max-w-md leading-relaxed">
+                    This website is an educational prototype for mental health awareness and comfort support. If you are experiencing an urgent medical emergency, please contact your local emergency services immediately.
+                </p>
+            </div>
+
+            <div class="flex gap-6 text-xs text-haven-sage">
+                <a href="#hero" class="hover:text-white transition-colors">Home</a>
+                <a href="#awareness" class="hover:text-white transition-colors">Awareness</a>
+                <a href="#comfort" class="hover:text-white transition-colors">Comfort Zone</a>
+                <a href="#resources" class="hover:text-white transition-colors">Helplines</a>
+            </div>
+        </div>
+
+        <div class="max-w-6xl mx-auto mt-8 pt-6 border-t border-haven-teal/60 text-center text-xs text-haven-sage/70">
+            &copy; 2026 Haven Mental Health Prototype. Designed for Care, Empathy, and Peace.
+        </div>
+    </footer>
+
+    <!-- Interactive JavaScript -->
+    <script>
+        // --- 1. 365 original daily comfort notes ---
+        // Notes are original and organized by theme. The date selects one note,
+        // while search, favorites and shuffle let visitors explore the collection.
+        const quoteSeeds = [
+            ["Self-kindness", [
+                "You are allowed to be a work in progress",
+                "Speak to yourself with the patience you offer a friend",
+                "Your worth is not a score you have to keep earning",
+                "You can make a mistake and still deserve respect",
+                "Being gentle with yourself is a form of courage",
+                "You do not need to apologize for having feelings",
+                "Your needs matter, even when they are quiet",
+                "You can be proud of yourself without being finished",
+                "You deserve kindness on ordinary days, too",
+                "You are more than the things you wish you could change"
+            ], [
+                "Give yourself room to learn as you go.",
+                "You do not have to prove that you deserve care.",
+                "Let today be a little softer than yesterday.",
+                "You can begin again without speaking harshly to yourself.",
+                "Treat your own heart as something worth looking after.",
+                "There is no prize for being unkind to yourself.",
+                "You are human, and that is reason enough for compassion.",
+                "Let progress be honest rather than perfect."
+            ]],
+            ["Hard days", [
+                "A difficult moment is not the whole story",
+                "You can pause before deciding what comes next",
+                "You do not have to solve every problem tonight",
+                "Even a slow day can hold a small victory",
+                "It is okay to ask someone safe to sit with you",
+                "You can take the next step without seeing the whole staircase",
+                "A heavy feeling deserves care, not criticism",
+                "You have permission to make today simpler",
+                "You are not failing because this feels difficult",
+                "Some days call for courage; others call for gentleness"
+            ], [
+                "For now, focus on the next manageable thing.",
+                "One moment at a time is a real way forward.",
+                "You can set down what does not need solving right now.",
+                "Small acts of care still count.",
+                "You do not have to carry a hard day alone.",
+                "Let the next breath be enough for this moment.",
+                "There is no need to rush your way through a feeling.",
+                "A hard chapter does not decide the ending."
+            ]],
+            ["Growth", [
+                "Growth can be quiet and still be meaningful",
+                "You are allowed to change your mind as you learn",
+                "Starting again is not the same as starting from nothing",
+                "Your pace does not need to match another person's",
+                "Small steps build paths that big promises cannot",
+                "You can learn from yesterday without living there",
+                "Every honest effort is part of your progress",
+                "You do not need a perfect plan to begin",
+                "The person you are becoming deserves your patience",
+                "A setback can teach you without defining you"
+            ], [
+                "Keep choosing the next helpful step.",
+                "Let curiosity guide you more than comparison.",
+                "Give your effort time to take root.",
+                "Progress is allowed to look different from day to day.",
+                "You can grow without rushing your own story.",
+                "Notice how far a small, steady choice can take you.",
+                "You are learning, not falling behind.",
+                "Make room for practice, adjustment and fresh starts."
+            ]],
+            ["Rest & balance", [
+                "Rest is a human need, not a reward",
+                "You are allowed to take a break before you feel empty",
+                "A slower pace can help you hear what you need",
+                "You do not have to be available every minute",
+                "Taking care of yourself supports the life you are building",
+                "A quiet moment can be productive in its own way",
+                "You can put one task down and return to it later",
+                "Your mind deserves moments without demands",
+                "Balance is something you practice, not something you perfect",
+                "It is okay to protect a little time for yourself"
+            ], [
+                "Let rest be part of the plan.",
+                "You are allowed to breathe between responsibilities.",
+                "Choose a pace you can care for.",
+                "A pause is not proof that you have given up.",
+                "You can return with a clearer mind after a little space.",
+                "Not everything needs your attention at once.",
+                "Give yourself permission to reset.",
+                "Your well-being belongs on your priority list."
+            ]],
+            ["Hope", [
+                "There are still gentle things you have not experienced yet",
+                "You do not need to feel hopeful every second to keep going",
+                "A new day can bring a different perspective",
+                "The future is not limited to what today feels like",
+                "You can leave room for good things to surprise you",
+                "A little light is still light",
+                "You are allowed to believe that things can become easier",
+                "There is more to your story than this one season",
+                "Hope can begin as a small willingness to try again",
+                "You can move toward a kinder tomorrow one choice at a time"
+            ], [
+                "Keep a little space open for possibility.",
+                "You do not have to know how everything will work out.",
+                "Let tomorrow be unwritten for now.",
+                "Good moments can arrive in ordinary ways.",
+                "A small beginning can still lead somewhere meaningful.",
+                "You can take today as it comes and leave room for change.",
+                "There is no need to predict the whole road ahead.",
+                "Let possibility sit beside you, even quietly."
+            ]]
+        ];
+        const comfortQuotes = [];
+        quoteSeeds.forEach(([category, beginnings, endings]) => {
+            for (let i = 0; i < beginnings.length; i++) {
+                for (let j = 0; j < endings.length; j++) {
+                    if (comfortQuotes.length >= 365) break;
+                    comfortQuotes.push({ category, text: beginnings[i] + ". " + endings[j] });
+                }
+                if (comfortQuotes.length >= 365) break;
+            }
+        });
+        let currentQuoteIndex = 0;
+        let showingFavoritesOnly = false;
+        const favoriteKey = "havenSavedComfortNotes";
+        function getFavorites() {
+            try { return JSON.parse(localStorage.getItem(favoriteKey) || "[]"); }
+            catch (error) { return []; }
+        }
+        function displayQuote(index) {
+            currentQuoteIndex = (index + comfortQuotes.length) % comfortQuotes.length;
+            const quote = comfortQuotes[currentQuoteIndex];
+            const display = document.getElementById("affirmationText");
+            display.style.opacity = "0";
+            setTimeout(() => {
+                display.textContent = quote.text;
+                display.style.opacity = "1";
+                document.getElementById("quoteCategory").textContent = quote.category;
+                document.getElementById("quoteDay").textContent = `Note ${currentQuoteIndex + 1} of 365`;
+                const saved = getFavorites().includes(currentQuoteIndex);
+                document.getElementById("favoriteQuoteBtn").innerHTML = saved
+                    ? '<i class="fa-solid fa-heart mr-1"></i> Saved'
+                    : '<i class="fa-regular fa-heart mr-1"></i> Save';
+            }, 160);
+        }
+        function showDailyQuote() {
+            const now = new Date();
+            const start = new Date(now.getFullYear(), 0, 0);
+            const day = Math.floor((now - start) / 86400000);
+            document.getElementById("dailyDate").textContent = now.toLocaleDateString(undefined, { month: "long", day: "numeric", year: "numeric" });
+            displayQuote((day - 1) % 365);
+            document.getElementById("quoteToast").textContent = "Your daily comfort note is ready.";
+            showingFavoritesOnly = false;
+        }
+        function generateAffirmation() {
+            let next = Math.floor(Math.random() * comfortQuotes.length);
+            if (comfortQuotes.length > 1 && next === currentQuoteIndex) next = (next + 1) % comfortQuotes.length;
+            displayQuote(next);
+            document.getElementById("quoteToast").textContent = "A little note, just for this moment.";
+            showingFavoritesOnly = false;
+        }
+        function toggleFavorite() {
+            const favorites = getFavorites();
+            const position = favorites.indexOf(currentQuoteIndex);
+            if (position >= 0) favorites.splice(position, 1);
+            else favorites.push(currentQuoteIndex);
+            localStorage.setItem(favoriteKey, JSON.stringify(favorites));
+            displayQuote(currentQuoteIndex);
+            document.getElementById("quoteToast").textContent = position >= 0 ? "Removed from your saved notes." : "Saved on this device.";
+        }
+        async function copyQuote() {
+            const text = "“" + comfortQuotes[currentQuoteIndex].text + "”";
+            try {
+                await navigator.clipboard.writeText(text);
+                document.getElementById("quoteToast").textContent = "Copied. Share these kind words with someone who may need them.";
+            } catch (error) {
+                document.getElementById("quoteToast").textContent = "Copy is unavailable in this browser. You can select the note and copy it manually.";
+            }
+        }
+        function showFavorites() {
+            showingFavoritesOnly = true;
+            const favorites = getFavorites();
+            renderQuoteResults(favorites, "Your saved notes");
+        }
+        function renderQuoteResults(indices, label) {
+            const results = document.getElementById("quoteResults");
+            results.innerHTML = "";
+            results.classList.remove("hidden");
+            document.getElementById("quoteSearchCount").textContent = `${indices.length} ${label.toLowerCase()}`;
+            if (!indices.length) {
+                results.innerHTML = '<p class="text-xs text-haven-textMuted p-3">No notes found yet. Save a note you would like to revisit.</p>';
+                return;
+            }
+            indices.slice(0, 60).forEach(index => {
+                const quote = comfortQuotes[index];
+                const button = document.createElement("button");
+                button.className = "block w-full text-left p-3 rounded-xl bg-white border border-haven-sage/60 hover:bg-haven-sage/20 text-sm text-haven-textDark";
+                button.textContent = quote.text;
+                button.addEventListener("click", () => {
+                    displayQuote(index);
+                    document.getElementById("quoteToast").textContent = "Note opened.";
+                });
+                results.appendChild(button);
+            });
+        }
+        function searchQuotes() {
+            showingFavoritesOnly = false;
+            const term = document.getElementById("quoteSearch").value.trim().toLowerCase();
+            const category = document.getElementById("quoteCategoryFilter").value;
+            const matches = comfortQuotes.map((quote, index) => ({ quote, index }))
+                .filter(item => (!term || item.quote.text.toLowerCase().includes(term)) &&
+                    (category === "all" || item.quote.category === category))
+                .map(item => item.index);
+            renderQuoteResults(matches, "matching notes");
+            if (!term && category === "all") document.getElementById("quoteSearchCount").textContent = "Explore all 365 notes";
+        }
+        document.getElementById("quoteSearch").addEventListener("input", searchQuotes);
+        document.getElementById("quoteCategoryFilter").addEventListener("change", searchQuotes);
+        showDailyQuote();
+
+        // --- 2. Guided Breathing Timer Logic ---
+        let breathingInterval = null;
+        let isBreathingActive = false;
+
+        function toggleBreathing() {
+            const circle = document.getElementById('breathCircle');
+            const text = document.getElementById('breathText');
+            const btnLabel = document.getElementById('breathBtnLabel');
+            const btnIcon = document.querySelector('#startBreathBtn i');
+
+            if (!isBreathingActive) {
+                // Start Exercise
+                isBreathingActive = true;
+                btnLabel.innerText = "Stop Exercise";
+                btnIcon.className = "fa-solid fa-pause text-xs";
+                
+                runBreathCycle(circle, text);
+                breathingInterval = setInterval(() => {
+                    runBreathCycle(circle, text);
+                }, 12000); // 12-second total box breathing cycle (4s Inhale, 4s Hold, 4s Exhale)
+            } else {
+                // Stop Exercise
+                isBreathingActive = false;
+                clearInterval(breathingInterval);
+                circle.className = "breath-circle flex items-center justify-center";
+                text.innerText = "Ready?";
+                btnLabel.innerText = "Start Exercise";
+                btnIcon.className = "fa-solid fa-play text-xs";
+            }
+        }
+
+        function runBreathCycle(circle, text) {
+            // Phase 1: Inhale (0s - 4s)
+            text.innerText = "Inhale...";
+            circle.classList.add('breath-expand');
+            circle.classList.remove('breath-hold');
+
+            // Phase 2: Hold (4s - 8s)
+            setTimeout(() => {
+                if (!isBreathingActive) return;
+                text.innerText = "Hold...";
+                circle.classList.add('breath-hold');
+            }, 4000);
+
+            // Phase 3: Exhale (8s - 12s)
+            setTimeout(() => {
+                if (!isBreathingActive) return;
+                text.innerText = "Exhale...";
+                circle.classList.remove('breath-expand', 'breath-hold');
+            }, 8000);
+        }
+
+        // --- 3. Mood Check-In Logic ---
+        const moodData = {
+            anxious: {
+                title: "Feeling Anxious or Overwhelmed?",
+                message: "Take a deep breath. Try the 4-second box breathing exercise above or place a warm hand over your chest. Remember that thoughts are just thoughts, not permanent facts."
+            },
+            sad: {
+                title: "Carrying a Heavy Heart?",
+                message: "It is completely okay to feel sad. You don't have to force yourself to feel happy right now. Treat yourself like you would a close friend who needs gentle comfort."
+            },
+            tired: {
+                title: "Feeling Exhausted or Burned Out?",
+                message: "Your body and mind are asking for rest. Give yourself permission to disconnect for a little while, drink a glass of water, and stretch gently."
+            },
+            calm: {
+                title: "Grounded & Peaceful",
+                message: "We're so glad you're feeling a sense of peace right now. Take a moment to appreciate this stillness and carry it with you into the rest of your day."
+            }
+        };
+
+        function checkInMood(type) {
+            const responseBox = document.getElementById('moodResponse');
+            const moodTitle = document.getElementById('moodTitle');
+            const moodMessage = document.getElementById('moodMessage');
+
+            const data = moodData[type];
+            if (data) {
+                moodTitle.innerText = data.title;
+                moodMessage.innerText = data.message;
+                responseBox.classList.remove('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
+```
